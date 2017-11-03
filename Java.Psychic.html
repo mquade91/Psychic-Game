@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+	<meta charset="UTF-8">
+	<title> Psychic Game</title>
+	<style>
+		#Psychic-Game {
+			text-align: center;
+			color: white;
+			background-color: #9932CC; 
+			font-family: cursive,sans-serif;
+			position: absolute;
+			opacity: 0.97;
+  			width: 100%;
+			height: 25%;
+			top: 33%;
+			font-size: 130%;
+			padding-bottom: 10px
+
+		}
+
+		body{
+
+			background-image: url("https://thumb9.shutterstock.com/display_pic_with_logo/759610/451156312/stock-vector-sacred-geometry-symbol-with-all-seeing-eye-in-acid-colors-mystic-alchemy-occult-concept-design-451156312.jpg");
+			padding:0px;
+			margin:0px;
+		}
+
+		
+
+	</style>
+</head>
+
+<body>
+	<!-- Instructions for the Psychic Game -->
+	<div id = "Psychic-Game">
+		<h1> Psychic Game </h1>
+		<p> Try to guess what letter the <strong>computer</strong> is thinking of. </p>
+		<p> Press any letter on your keyboard to begin. <em>KEEP IN MIND IT WILL BE YOUR FIRST GUESS<em>, Good Luck! </p>
+	</div>
+
+
+	<script type= "text/javascript">
+		
+		// <!-- Below is an array that lists all of the options the computer can choose -->
+		var computerChoices = ["q", "w", "e", "r", "t", "y", "u", "i", "o", "p", "a", "s", "d", "f", "g", "h", "j", "k", "l", "z", "x", "c", "v", "b", "n", "m"];
+		
+
+		//var computerGuess = "?";
+		// var computerPicks = [];
+		// List of keys already pressed
+      	var keysPressed = [];	
+      	// These variables  hold the number of wins, losses, and guesses left played. They start at 0.
+		var wins = 0;
+		var losses = 0;	
+		var guesses_left = 10;
+		
+
+
+		function resetGameWin() {
+			// Randomly chooses a letter from the computerChoices array. This is the Computer's guess.
+			computerGuess = computerChoices[Math.floor(Math.random() * 25)];
+			
+			// computerPicks.push(computerGuess);
+			// console.log ("the computer chose: " + computerGuess);
+			guesses_left = 10;
+			keysPressed = [];
+			console.log("Wins: " + wins);
+			console.log ("the computer chose: " + computerGuess);
+			alert("You won!  Total Wins: " + wins + " [PRESS OK to keep winning]")	
+		}
+
+		function resetGameLoss() {
+			guesses_left=10;
+			losses ++;
+			keysPressed = [];
+			computerGuess = computerChoices[Math.floor(Math.random() * 25)];
+			console.log ("the computer chose: " + computerGuess);// computerPicks.push(computerGuess);
+			console.log("Losses: " + losses)
+			alert("Oh no you didn't guess the right letter [PRESS OK to try again]")
+
+		}
+		// //start the game
+		// resetGameWin();
+		// resetGameLoss();
+
+
+		var computerGuess = computerChoices[Math.floor(Math.random() * 25)]; 
+		console.log("The computer chose: " + computerGuess);
+		// This function is run whenever the user presses a key.
+		document.onkeyup = function(event) {
+
+    		// Determines which key was pressed.
+    		var userGuess = event.key; 
+    		keysPressed.push(userGuess);
+    		console.log(keysPressed)
+
+
+      		// // pushes guesses to list keysPressed
+      		// keysPressed.push(userGuess);
+      		// console.log(keysPressed);
+
+      		//will determine win
+      		if (computerGuess === userGuess) {
+      			wins++;
+      			
+      			resetGameWin();
+      			
+      		}
+
+      		
+      		else  {
+      			guesses_left--;
+      			
+
+
+
+      		}
+      		//will determine loss
+      		if (guesses_left === 0) {
+      			resetGameLoss();
+
+
+      		}
+			
+			
+
+	// Variables below will display our choice, computer choice, wins and losses//
+	var html =
+	"<p>Your guesses so far: " + keysPressed + "</p>" +
+	"<p>Amount of guesses left: " + guesses_left + "</p>" +
+	"<p>Wins: " + wins + "</p>" +
+	"<p>Losses: " + losses + "</p>";
+
+	document.querySelector("#Psychic-Game").innerHTML = html;
+
+
+};    
+
+
+</script>
+
+
+
+</body>	
+</html>
